@@ -1,0 +1,254 @@
+<HTML>
+<HEAD>
+<TITLE>ArrayMethods Module Help</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF"><FONT FACE="Arial">
+
+
+<CENTER>
+<FONT SIZE="+3" COLOR="#000099"><B> ArrayMethods Module 1.0 </B></FONT>
+<BR><FONT SIZE="+1"> Reference Documentation </FONT>
+<HR>
+</CENTER>
+
+
+<P><FONT SIZE="+2" COLOR="#000099"><B> Table of Contents </B></FONT>
+
+<UL>
+  <LI><A HREF="#introduction"> Introduction</A>
+  <LI><A HREF="#application"> Applying this Module</A>
+  <LI><A HREF="#declarations"> Public Declarations</A>
+  <LI><A HREF="#methods"> Public Methods</A>
+  <LI><A HREF="#revisions"> Revision History</A>
+  <LI><A HREF="#credits"> Credits</A>
+</UL>
+
+
+<A NAME="introduction">
+<P><FONT SIZE="+2" COLOR="#000099"><B> Introduction </B></FONT>
+
+<BR>The primary purpose of this module is to provide common array manipulation functionality.  The module was written for Visual Basic 6.0, but should be compatible with most other versions.
+
+<P>Like most typical programming languages, VB includes some built-in provisions for array manipulation.  They can be used to create, resize, and copy whole arrays, to determine their sizes and to read and write individual items within.  Unfortunately, not included are a number of routines for manipulating whole arrays.  What if one wanted an array to be a copy of just the first twenty items of another array?  To concatenate two arrays together?  To insert one or more items into the middle of an array?
+
+<P>This module makes up for such inadequacies by providing a number of routines to perform more sophisticated tasks like these.
+
+<P>This module does not depend on any libraries beyond the one that comes standard with Visual Basic.
+
+
+<A NAME="application">
+<P><FONT SIZE="+2" COLOR="#000099"><B> Applying this Module </B></FONT>
+<BR>Here is some help for the programmer on how to use this module in his own applications.
+
+<P>Most of the routines in this module are designed to move stuff around within or merge arrays.  Most of those tasks can be achieved by using the most esoteric one: <TT><A HREF="#method_ArraySplice">ArraySplice()</A></TT>.  <TT><A HREF="#method_ArraySplice">ArraySplice()</A></TT> essentially removes a single section of an array and inserts the contents of another array in its place.  You could use this subroutine, for example, to remove items four through seven from an array and replace that section with the three items in another array.  The following illustrates:
+
+<UL>
+<TABLE>
+<TR>
+
+  <TD><FONT COLOR="#006600"><TT> ArraySplice ListA, 4, 3, ListB </TT></FONT></TD>
+
+</TR><TR>
+
+  <TD>ListA initially:</TD>
+  <TD><TABLE BGCOLOR="#FFFFCC" CELLSPACING="0" CELLPADDING="4" BORDER="1"><TR>
+    <TD> A </TD>
+    <TD> B </TD>
+    <TD> C </TD>
+    <TD> D </TD>
+    <TD BGCOLOR="#DDDDCC"> E </TD>
+    <TD BGCOLOR="#DDDDCC"> F </TD>
+    <TD BGCOLOR="#DDDDCC"> G </TD>
+    <TD BGCOLOR="#DDDDCC"> H </TD>
+    <TD> I</TD>
+    <TD> J</TD>
+  </TR></TABLE></TD>
+  <TD>&nbsp;&nbsp;&nbsp;&nbsp; ListB:</TD>
+  <TD><TABLE BGCOLOR="#CCFFFF" CELLSPACING="0" CELLPADDING="4" BORDER="1"><TR>
+    <TD> x </TD>
+    <TD> y </TD>
+    <TD> z </TD>
+  </TR></TABLE></TD>
+
+</TR><TR>
+
+  <TD>ListA after removal:</TD>
+  <TD><TABLE BGCOLOR="#FFFFCC" CELLSPACING="0" CELLPADDING="4" BORDER="1"><TR>
+    <TD> A </TD>
+    <TD> B </TD>
+    <TD> C </TD>
+    <TD> D </TD>
+    <TD> I</TD>
+    <TD> J</TD>
+  </TR></TABLE></TD>
+
+</TR><TR>
+
+  <TD>ListA after insertion:</TD>
+  <TD><TABLE BGCOLOR="#FFFFCC" CELLSPACING="0" CELLPADDING="4" BORDER="1"><TR>
+    <TD> A </TD>
+    <TD> B </TD>
+    <TD> C </TD>
+    <TD> D </TD>
+    <TD BGCOLOR="#CCFFFF"> x </TD>
+    <TD BGCOLOR="#CCFFFF"> y </TD>
+    <TD BGCOLOR="#CCFFFF"> z </TD>
+    <TD> I</TD>
+    <TD> J</TD>
+  </TR></TABLE></TD>
+
+</TR>
+</TABLE>
+</UL>
+
+The section doesn't have to be in the middle.  One can work at either end of the array.  Further, it isn't necessary to either remove anything (<FONT COLOR="#006600"><TT>Length = 0</TT></FONT>) or to insert anything afterwards.
+
+<P>While <TT><A HREF="#method_ArraySplice">ArraySplice()</A></TT> can be used to do things like inserting single items (Using <FONT COLOR="#006600"><TT>ListToInsert = Array(ItemToInsert)</TT></FONT>) or list concatenation, you may find many of the other routines are simpler, easier to read, and more efficiently coded, because of their specialization.
+
+<A NAME="declarations">
+<P><FONT SIZE="+2" COLOR="#000099"><B> Public Declarations </B></FONT>
+<BR>There are no public declarations of constants, variables, enumerations, etc.
+
+
+
+<A NAME="methods">
+<P><FONT SIZE="+2" COLOR="#000099"><B> Public Methods </B></FONT>
+<BR>This module offers the following publicly available functions and subroutines:
+
+<P>
+<A HREF="#method_ArrayAppend">ArrayAppend</A> |
+<A HREF="#method_ArrayConcatenate">ArrayConcatenate</A> |
+<A HREF="#method_ArrayCopy">ArrayCopy</A> |
+<A HREF="#method_ArrayInsert">ArrayInsert</A> |
+<A HREF="#method_ArrayRemove">ArrayRemove</A> |
+<A HREF="#method_ArraySplice">ArraySplice</A> |
+<A HREF="#method_ArrayToString">ArrayToString</A> |
+<A HREF="#method_ArrayTrim">ArrayTrim</A>
+
+
+<A NAME="method_ArrayAppend">
+<P><FONT SIZE="+1" COLOR="#006699"><B> ArrayAppend </B></FONT>
+<BR><TT> ArrayAppend(List, Item) </TT>
+<P>Add a new item to the end of the array.
+
+<A NAME="method_ArrayConcatenate">
+<P><FONT SIZE="+1" COLOR="#006699"><B> ArrayConcatenate </B></FONT>
+<BR><TT> Sub ArrayConcatenate(List, ListToCopyFrom) </TT>
+<P>Concatenate (copy) one list's contents to the end of another.
+
+<A NAME="method_ArrayCopy">
+<P><FONT SIZE="+1" COLOR="#006699"><B> ArrayCopy </B></FONT>
+<BR><TT> Sub ArrayCopy(List, ListToCopyFrom, Optional ByVal StartAt As Integer = 0, Optional ByVal Length As Integer = -1) </TT>
+<P>Copy the first array's contents to the second.  Allows a subset
+of the array to be specified with a start point and length.
+Please note that if there are no items to copy, the array may
+still end up with one item, since not all arrays can have zero
+items.  A Length value less than zero is the same as not
+specifying a length: all items after StartAt will be copied.
+
+<A NAME="method_ArrayInsert">
+<P><FONT SIZE="+1" COLOR="#006699"><B> ArrayInsert </B></FONT>
+<BR><TT> Sub ArrayInsert(List, ByVal Index As Integer, Item) </TT>
+<P>Create a gap in the array before the specified index and insert
+the item into it.
+
+<A NAME="method_ArrayRemove">
+<P><FONT SIZE="+1" COLOR="#006699"><B> ArrayRemove </B></FONT>
+<BR><TT> Sub ArrayRemove(List, ByVal Index As Integer) </TT>
+<P>Remove an item from the array and close the gap with whatever
+was above it.  Note that while a Variant with an array can
+have zero items, other kinds of array require at least one item.
+This means that if you pass a one-item array that can't be
+shrunk down to zero, the last item will be left alone.
+
+<A NAME="method_ArraySplice">
+<P><FONT SIZE="+1" COLOR="#006699"><B> ArraySplice </B></FONT>
+<BR><TT> Sub ArraySplice(List, ByVal StartAt As Long, ByVal Length As Long, Optional ListToInsert) </TT>
+<P>Cut a section out of the list and (optionally) insert the contents
+of another list.  For example:
+
+<UL><TABLE><TR>
+  <TD><FONT COLOR="#006600"><TT> ArraySplice </TT></FONT></TD>
+  <TD><TABLE BGCOLOR="#FFFFCC" CELLSPACING="0" CELLPADDING="4" BORDER="1"><TR>
+    <TD> A </TD><TD> B </TD><TD> C </TD><TD> D </TD><TD> E </TD>
+  </TR></TABLE></TD>
+  <TD><FONT COLOR="#006600"><TT>, 2, 2, </TT></FONT></TD>
+  <TD><TABLE BGCOLOR="#CCFFFF" CELLSPACING="0" CELLPADDING="4" BORDER="1"><TR>
+    <TD> x </TD><TD> y </TD><TD> z </TD>
+  </TR></TABLE></TD>
+</TR></TABLE></UL>
+
+<TABLE><TR>
+  <TD>yeilds:</TD>
+  <TD><TABLE CELLSPACING="0" CELLPADDING="4" BORDER="1"><TR>
+    <TD BGCOLOR="#FFFFCC"> A </TD>
+    <TD BGCOLOR="#FFFFCC"> B </TD>
+    <TD BGCOLOR="#CCFFFF"> x </TD>
+    <TD BGCOLOR="#CCFFFF"> y </TD>
+    <TD BGCOLOR="#CCFFFF"> z </TD>
+    <TD BGCOLOR="#FFFFCC"> E </TD>
+  </TR></TABLE></TD>
+</TR></TABLE>
+
+<P>See <A HREF="#application">Applying This Module</A> for more on the utility of this subroutine.
+
+
+<A NAME="method_ArrayToString">
+<P><FONT SIZE="+1" COLOR="#006699"><B> ArrayToString </B></FONT>
+<BR><TT> Function ArrayToString(List, Optional ByVal Separator As String = vbCrLf) As String </TT>
+<P>Create a string representation of the array.  If you don't specify a
+separator, <CR><LF>, the Windows standard new-line combination, is
+assumed.  The following values have special representations:
+
+<UL><TABLE CELLSPACING="0" CELLPADDING="4" BORDER="2">
+<TR><TD> Null </TD><TD><FONT COLOR="#006600"><TT> {Null} </TT></FONT></TD></TR>
+<TR><TD> Empty </TD><TD><FONT COLOR="#006600"><TT> {Empty} </TT></FONT></TD></TR>
+<TR><TD> Object Ref </TD><TD><FONT COLOR="#006600"><TT> {Object:<FONT COLOR="#990000">&lt;type&gt;</FONT>}</TT></FONT> <BR>(e.g., <FONT COLOR="#006600"><TT> {Object:Collection} </TT></FONT>) </TD></TR>
+</TABLE></UL>
+
+<P>This routine is great for debugging apps that use arrays.
+
+
+<A NAME="method_ArrayTrim">
+<P><FONT SIZE="+1" COLOR="#006699"><B> ArrayTrim </B></FONT>
+<BR><TT> Sub ArrayTrim(List, Optional ByVal TrimFromBeginning As Integer = 0, Optional ByVal TrimFromEnd As Integer = 0) </TT>
+<P>Trim items from the beginning and/or end of the array.  For example:
+
+<UL><TABLE><TR>
+  <TD><FONT COLOR="#006600"><TT> ArrayTrim </TT></FONT></TD>
+  <TD><TABLE BGCOLOR="#FFFFCC" CELLSPACING="0" CELLPADDING="4" BORDER="1"><TR>
+    <TD BGCOLOR="#DDDDCC"> A </TD>
+    <TD BGCOLOR="#DDDDCC"> B </TD>
+    <TD> C </TD>
+    <TD> D </TD>
+    <TD BGCOLOR="#DDDDCC"> E </TD>
+  </TR></TABLE></TD>
+  <TD><FONT COLOR="#006600"><TT>, 2, 1 </TT></FONT></TD>
+</TR></TABLE></UL>
+
+<TABLE><TR>
+  <TD>yeilds:</TD>
+  <TD><TABLE BGCOLOR="#FFFFCC" CELLSPACING="0" CELLPADDING="4" BORDER="1"><TR>
+    <TD> C </TD><TD> D </TD>
+  </TR></TABLE></TD>
+</TR></TABLE>
+
+
+
+
+<A NAME="revisions">
+<P><FONT SIZE="+2" COLOR="#000099"><B> Revision History </B></FONT>
+
+<P><FONT SIZE="+1" COLOR="#006699"><B> ArrayMethods 1.0 </B></FONT>
+<BR><I> Released 31 May 2000 </I>
+<BR>Initial release
+
+
+
+<A NAME="credits">
+<P><FONT SIZE="+2" COLOR="#000099"><B> Credits </B></FONT>
+<BR>Version 1.0 of the ArrayMethods module was created by <B><A HREF="http://alexandria.nu/user/jcarnicelli/">James Vincent Carnicelli</A></B>.  Documentation was prepared by same.
+
+
+</FONT></BODY>
+</HTML>
